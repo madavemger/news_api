@@ -1,28 +1,40 @@
 <style>
-    .btn{
-        background-color: green;border-radius: 5px;color: white;border: none;padding: 5px;font-size: 15px;
-        transition: all ease 700ms;
-    }
-    .btn:hover{
-        background-color: white;
-        color: green;
-        transition: all ease 700ms;
-    }
-    label{
-        font-size: 15px;
+    table{
+        border: 2px solid #dddd !important;
+        border-bottom: none !important;
+        font-size: 15px !important;
+        font-weight: bold !important;
+        border-radius: 5px !important;
     }
 </style>
 <div class="wrap">
-        <header>تنظیمات پلاگین</header>
-    <form action="" method="post">
-        <label for="is_plugin_active">
+    <h1>
+        لیست اطلاعات
+    </h1>
+    <a href="<?php echo add_query_arg(['action' => 'add'])?>">
+        ثبت داده جدید
+    </a>
+    <table class="widefat" dir="rtl">
+        <thead>
+        <tr>
+            <th>id</th>
+            <th>نام</th>
+            <th>نام خانوادگی</th>
+            <th>شماره تلفن</th>
+            <th>عملیات</th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php foreach ($samples as $sample): ?>
+        <tr>
+            <td><?php echo $sample->id; ?></td>
+            <td><?php echo $sample->firstName; ?></td>
+            <td><?php echo $sample->lastName; ?></td>
+            <td><?php echo $sample->mobile; ?></td>
+            <td><a href="<?php echo add_query_arg(['action' => 'delete' , 'item' => $sample->id]) ?>">حذف کردن</a></td>
 
-            <input name="is_plugin_active" id="mycheckbox" type="checkbox"
-            <?php echo  isset($current_plugin_status) && intval($current_plugin_status) > 0 ? 'checked': ''; ?>
-            >
-            فعال بودن پلاگین
-        </label>
-        <button class="btn" type="submit" name="savesettings" >ذخیره سازی</button>
-
-    </form>
+        </tr>
+        <?php endforeach ; ?>
+        </tbody>
+    </table>
 </div>
